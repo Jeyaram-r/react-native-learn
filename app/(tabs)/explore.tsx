@@ -23,6 +23,9 @@ export default function Explore() {
           Hello, {submittedFirstName} {submittedLastName}
         </Text>
       )}
+      <Text 
+      style={{ alignSelf: "flex-start", marginBottom: 5 , fontSize:16, fontWeight:'bold'}}
+      >First Name:</Text>
       <TextInput
         // label="First Name"
         placeholder="Enter First Name"
@@ -35,7 +38,10 @@ export default function Explore() {
           marginBottom: 10,
         }}
       />
-
+      <Text
+      
+      style={{ alignSelf: "flex-start", marginBottom: 5 , fontSize:16, fontWeight:'bold'}}
+      >Last Name:</Text>
       <TextInput
         placeholder="Enter Last Name"
         value={lastName}
@@ -51,9 +57,18 @@ export default function Explore() {
       <Button
         title="Submit"
         onPress={() => {
-          setSubmittedFirstName(firstName);
-          setSubmittedLastName(lastName);
-        }}
+    if (!firstName || !lastName) {
+      alert("Please enter both first and last name");
+      return;
+    }
+
+    setSubmittedFirstName(firstName);
+    setSubmittedLastName(lastName);
+
+    // Clear inputs
+    setFirstName("");
+    setLastName("");
+  }}
       />
 
       
