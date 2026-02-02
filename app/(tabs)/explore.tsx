@@ -5,8 +5,7 @@ export default function Explore() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const [submittedFirstName, setSubmittedFirstName] = useState("");
-  const [submittedLastName, setSubmittedLastName] = useState("");
+  const [submitted, setSubmitted] = useState(false); // 👈 NEW
 
   return (
     <View
@@ -18,19 +17,10 @@ export default function Explore() {
         backgroundColor: "white",
       }}
     >
-      {submittedFirstName !== "" && (
-        <Text style={{ marginBottom: 50, fontSize: 18 , fontWeight: "bold"}}>
-          Hello, {submittedFirstName} {submittedLastName}
-        </Text>
-      )}
-      <Text 
-      style={{ alignSelf: "flex-start", marginBottom: 5 , fontSize:16, fontWeight:'bold'}}
-      >First Name:</Text>
       <TextInput
-        // label="First Name"
         placeholder="Enter First Name"
         value={firstName}
-        onChangeText={setFirstName}
+        onChangeText={setFirstName}   // 👈 REQUIRED
         style={{
           borderWidth: 1,
           width: "100%",
@@ -38,14 +28,11 @@ export default function Explore() {
           marginBottom: 10,
         }}
       />
-      <Text
-      
-      style={{ alignSelf: "flex-start", marginBottom: 5 , fontSize:16, fontWeight:'bold'}}
-      >Last Name:</Text>
+
       <TextInput
         placeholder="Enter Last Name"
         value={lastName}
-        onChangeText={setLastName}
+        onChangeText={setLastName}    // 👈 REQUIRED
         style={{
           borderWidth: 1,
           width: "100%",
@@ -57,21 +44,15 @@ export default function Explore() {
       <Button
         title="Submit"
         onPress={() => {
-    if (!firstName || !lastName) {
-      alert("Please enter both first and last name");
-      return;
-    }
-
-    setSubmittedFirstName(firstName);
-    setSubmittedLastName(lastName);
-
-    // Clear inputs
-    setFirstName("");
-    setLastName("");
-  }}
+          setSubmitted(true);        // 👈 show name only after submit
+        }}
       />
 
-      
+      {submitted && (               // 👈 CONDITIONAL RENDER
+        <Text style={{ marginTop: 20, fontSize: 18 }}>
+          Hello, {firstName} {lastName}
+        </Text>
+      )}
     </View>
   );
 }

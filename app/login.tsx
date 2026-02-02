@@ -2,8 +2,9 @@ import { ThemedText } from "@/components/themed-text";
 import { useState } from "react";
 import { Button, TextInput, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { useRouter } from "expo-router";
 export default function Login() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -77,7 +78,10 @@ export default function Login() {
         }}
       />
 
-      <Button title="Login" onPress={handleLogin} />
+      <Button title="Login" onPress={()=>{
+          router.replace("/(tabs)");
+          handleLogin(); // 👈 Go to Home
+        }} />
     </LinearGradient>
   );
 }
